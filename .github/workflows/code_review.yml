@@ -15,7 +15,7 @@ jobs:
           SHA: '${{env.parentSHA}}'
         with:
           script: |
-            const script = require('./action_scripts/codereview_script.js')
+            const script = require('./action_scripts/codereview.js')
             await script({github, context, core})
       # - uses: actions/add-to-project@main
       #   with:
