@@ -1,0 +1,24 @@
+name: Code review verifier
+
+on: 
+  push:
+    branches: [ "main" ]
+
+jobs:
+  echo-input:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        env:
+          SHA: '${{env.parentSHA}}'
+        with:
+          script: |
+            const script = require('./action_scripts/codereview_script.js')
+            await script({github, context, core})
+      # - uses: actions/add-to-project@main
+      #   with:
+      #     project-url: https://github.com/users/JRMurr/projects/1
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     labeled: needs-review
